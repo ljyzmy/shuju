@@ -1,23 +1,47 @@
 # qzd_db —— 企知道类「企业 / 专利 / 论文 / 政策」大数据平台 · 样本数据库
 
-本仓库通过 Git LFS 发布 `qzd_db.zip`（约 1.5GB）。包内是可恢复的 PostgreSQL 17 数据库：统一 schema，以及可重复执行的下载/入库脚本。
-企业侧包含 GLEIF 与英国 Companies House 公开数据；论文、专利为样本；国内政策来自中国政府网政策库与部分部委/省级栏目。
+本仓库通过 Git LFS 发布两个完整包（仓库里不保留分片）：
+
+- `qzd_db.zip`（1,593,883,796 字节，sha256 `0e4b5a83a3c64fe02560535ca9d977107b1f9e4e08060dfeb67e7f5058f3c8ba`）：PostgreSQL dump、脚本，以及除 `company.csv.gz` 以外的 CSV
+- `qzd_db_company_csv.zip`（986,006,528 字节，sha256 `578060613cb97a4b8e5dae256365eb14c8032e68f44e05aad5b88e327ef745a6`）：仅 `export/csv/company.csv.gz`
+
+包内是可恢复的 PostgreSQL 17 数据库：统一 schema，以及可重复执行的下载/入库脚本。
+企业侧包含 GLEIF 与英国 Companies House 公开数据（条数与 v3 一致），并补充苏州相关公开名单；论文、专利为样本；国内政策来自中国政府网政策库与部分部委/省级栏目。
 只使用合法、免费、公开的数据。
 
 ## 当前发布包
 
 | 数据 | 条数 |
 |---|---|
-| 企业 | 9,197,639（中国 CN 约 136,279） |
-| GLEIF | 3,463,900 |
-| UK Companies House | 5,704,711 |
-| 专利 | 723,336 |
-| 论文 | 10,000 |
-| 机构 | 13,633 |
-| 人员 | 约 74,787 |
-| 政策 | 27,477 |
+| 企业 | 约 9,215,555 |
+| 苏州（city） | 约 19,742 |
+| 苏州相关名单 | 约 3.6 万 |
+| GLEIF | 3,463,900（与 v3 一致） |
+| UK Companies House | 5,704,711（与 v3 一致） |
+| 专利 | 723,336（与 v3 一致） |
+| 论文 | 10,000（与 v3 一致） |
+| 机构 | 13,633（与 v3 一致） |
+| 人员 | 约 74,787（与 v3 一致） |
+| 政策 | 27,477（与 v3 一致） |
 
-压缩包约 1.5GB（1,591,043,836 字节，sha256 `aefb10b8ef3b7788ad09e03d02942ce8194fdcae29fe7042b435dac356ad96ce`）。克隆后执行 `git lfs pull` 获取 `qzd_db.zip`。
+### 下载
+
+仓库现有两个 Git LFS 文件，没有分片。克隆后拉取 LFS 对象：
+
+```bash
+git lfs install
+git clone https://github.com/ljyzmy/shuju.git
+cd shuju
+git lfs pull
+```
+
+只拉取这两个包：
+
+```bash
+git lfs pull --include="qzd_db.zip,qzd_db_company_csv.zip"
+```
+
+`qzd_db.zip` 解压后得到 dump、脚本和其余 CSV。`company.csv.gz` 在 `qzd_db_company_csv.zip` 里，解压后放到 `export/csv/company.csv.gz`，即可与 dump 一起使用。
 
 ## 1. 目录
 ```
@@ -39,6 +63,7 @@ qzd_db/
 ├── data/raw/                  # 原始下载（jsonl / zip）
 ├── data/state/policy_crawl.sqlite  # 政策爬虫状态库（含全文，可单独使用）
 └── export/                    # qzd.dump（pg_restore 用）、csv/*.csv.gz
+                               # company.csv.gz 在 qzd_db_company_csv.zip，不在 qzd_db.zip
 ```
 
 ## 2. 结构图
