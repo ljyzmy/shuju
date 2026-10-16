@@ -1,8 +1,21 @@
 # qzd_db —— 企知道类「企业 / 专利 / 论文 / 政策」大数据平台 · 样本数据库
 
-本目录是一个**可运行的样本库**：PostgreSQL 17 + 统一 schema + 可重复执行的下载/入库脚本。
-论文、专利、企业为**小样本**；国内政策为**尽量全量**（中国政府网政策库全量 + 部委/省级栏目）。
-只使用合法、免费、公开的数据。
+本仓库通过 Git LFS 发布 `qzd_db.zip`（约 766MB）。包内是可恢复的 PostgreSQL 17 样本库：统一 schema，以及可重复执行的下载/入库脚本。
+只使用合法、免费、公开的数据。国内政策来自中国政府网政策库与部分部委/省级栏目。
+
+## 当前发布包
+
+| 数据 | 条数 |
+|---|---|
+| 企业 | 160,200（中国 CN 约 136,280） |
+| 专利 | 723,336（中国 CN 约 716,282） |
+| 论文 | 10,000 |
+| 机构 | 13,633 |
+| 人员 | 约 74,787 |
+| 政策 | 27,477 |
+| company_list | 9,089 |
+
+压缩包约 766MB（766,512,866 字节）。克隆后执行 `git lfs pull` 获取 `qzd_db.zip`。
 
 ## 1. 目录
 ```
@@ -59,11 +72,11 @@ erDiagram
 ## 3. 数据源、样本条数、全量规模、许可
 | 类别 | 数据源 | 本库样本 | 全量规模与获取方式 | 许可 |
 |---|---|---|---|---|
-| 论文 | OpenAlex API：中国机构参与的 2024 年起 works | works 5,000；authors 43,317（3,000 条有完整画像）；institutions 8,375（中国机构 3,000 + 中国企业型机构 1,000 + 署名机构） | 约 2.7 亿 works；snapshot `aws s3 sync s3://openalex openalex-snapshot --no-sign-request`（约 300GB gz）。API 免 key 只能 page 分页且只到 1 万条，每日 0.1 美元额度；更大量需免费 API key（环境变量 `OPENALEX_API_KEY`） | CC0 |
-| 专利 | Google Patents Public Data（IFI CLAIMS/Google）的 HuggingFace parquet 镜像 `labofsahil/patents-publications-dataset` | 17,054 件：CN 10,000；中国申请人的海外专利（US/WO/EP/JP…）2,054；其他国家 5,000；申请人/发明人 59,514；引用 26,580 | 1.6 亿余件公开文本；BigQuery `patents-publications.patents.publications`，或镜像全部 parquet（每个约 13.6GB，共数 TB）。PatentsView 已迁入 USPTO ODP（2026-06-18 起要 USPTO.gov 账号+MFA+API key）；EPO OPS、Lens 要免费注册拿 token | CC BY 4.0（Google Patents Public Data） |
-| 企业（全球） | GLEIF LEI API | 10,108 条（CN 8,052 / HK 2,018 / 补查种子） | 约 300 万 LEI；Golden Copy 每日全量 CSV：https://www.gleif.org/en/lei-data/gleif-golden-copy （约 450MB zip），另有关系文件 RR（母子公司） | CC0 |
-| 企业（英国） | Companies House BasicCompanyData | 20,000 条（part1 前 2 万行） | 约 550 万家，7 个分卷共约 470MB zip：https://download.companieshouse.gov.uk/en_output.html | OGL v3 |
-| 企业（国内工商） | —— | 仅表结构（company + cn_company_ext） | **没有合法的公开批量包**，需要商业采购：企查查/天眼查/启信宝开放平台 API，或各地数据交易所。国家企业信用信息公示系统只能逐条查，禁止批量爬 | 按采购合同 |
+| 论文 | OpenAlex API：中国机构参与的 2024 年起 works | 10,000；机构 13,633；人员约 74,787 | 约 2.7 亿 works；snapshot `aws s3 sync s3://openalex openalex-snapshot --no-sign-request`（约 300GB gz）。API 免 key 只能 page 分页且只到 1 万条，每日 0.1 美元额度；更大量需免费 API key（环境变量 `OPENALEX_API_KEY`） | CC0 |
+| 专利 | Google Patents Public Data（IFI CLAIMS/Google）的 HuggingFace parquet 镜像 `labofsahil/patents-publications-dataset` | 723,336 件（CN 约 716,282） | 1.6 亿余件公开文本；BigQuery `patents-publications.patents.publications`，或镜像全部 parquet（每个约 13.6GB，共数 TB）。PatentsView 已迁入 USPTO ODP（2026-06-18 起要 USPTO.gov 账号+MFA+API key）；EPO OPS、Lens 要免费注册拿 token | CC BY 4.0（Google Patents Public Data） |
+| 企业（全球） | GLEIF LEI API | 合计 160,200（CN 约 136,280） | 约 300 万 LEI；Golden Copy 每日全量 CSV：https://www.gleif.org/en/lei-data/gleif-golden-copy （约 450MB zip），另有关系文件 RR（母子公司） | CC0 |
+| 企业（英国） | Companies House BasicCompanyData | 计入企业合计 | 约 550 万家，7 个分卷共约 470MB zip：https://download.companieshouse.gov.uk/en_output.html | OGL v3 |
+| 企业（国内工商） | 公开名单、LEI 与相关公开来源 | 中国约 136,280；company_list 9,089 | **没有合法的公开批量包**覆盖全部工商主体，全量需要商业采购：企查查/天眼查/启信宝开放平台 API，或各地数据交易所。国家企业信用信息公示系统只能逐条查，禁止批量爬 | 按采购合同 |
 | 商标 | —— | 空表 trademark | 国内：商标局「商标网上查询」逐条查，批量需商业采购；美国：USPTO 商标 bulk（ODP，要 key） | — |
 | 产业链 | —— | 空表 industry_chain / industry_node | 需自建：人工梳理 + IPC/关键词映射 | 自有 |
 | 政策 | 中国政府网政策文件库 + 部委/省级政策栏目（见第 4 节） | 见第 4 节 | 见第 4 节 | 政府信息公开；保留原文 URL 并注明来源 |
