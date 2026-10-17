@@ -1,0 +1,296 @@
+{
+  "extracted_at": "2026-10-17 12:57:51 CST",
+  "material_meta": {
+    "pack_role": "service_provider_internal_training",
+    "uses": [
+      "internal_training",
+      "exam",
+      "case_review",
+      "policy_playbook"
+    ],
+    "region_focus": [
+      "江苏省",
+      "苏州市"
+    ],
+    "not": [
+      "external_company_intro",
+      "bid_qualification_pack"
+    ]
+  },
+  "subject": {
+    "name": "钟林集团",
+    "name_normalized": "钟林集团",
+    "uscc": null,
+    "company_id": null,
+    "subject_status": "pending_verify",
+    "match_method": null,
+    "positioning": "面向科技型、制造型中小企业的综合科技咨询服务机构",
+    "slogan": "赋能科技成长 / 助力企业创新"
+  },
+  "business_tags": [
+    "科技咨询",
+    "政府资助申报",
+    "资质认定",
+    "知识产权",
+    "审计财税",
+    "产学研",
+    "江苏苏州"
+  ],
+  "list_items": [
+    {
+      "list_type": "高新技术企业",
+      "list_name": "高新技术企业认定",
+      "issuer": null,
+      "province": "江苏省",
+      "city": "苏州市",
+      "year": 2026,
+      "role": "service_offering"
+    },
+    {
+      "list_type": "科技型中小企业",
+      "list_name": "科技型中小企业评价入库",
+      "issuer": null,
+      "province": "江苏省",
+      "city": "苏州市",
+      "year": 2026,
+      "role": "service_offering"
+    },
+    {
+      "list_type": "创新型中小企业",
+      "list_name": "创新型中小企业",
+      "issuer": null,
+      "province": "江苏省",
+      "city": "苏州市",
+      "year": 2026,
+      "role": "service_offering"
+    },
+    {
+      "list_type": "专精特新",
+      "list_name": "省专精特新中小企业",
+      "issuer": null,
+      "province": "江苏省",
+      "city": "苏州市",
+      "year": 2026,
+      "role": "service_offering"
+    },
+    {
+      "list_type": "专精特新小巨人",
+      "list_name": "专精特新小巨人",
+      "issuer": null,
+      "province": "江苏省",
+      "city": "苏州市",
+      "year": 2026,
+      "role": "service_offering"
+    },
+    {
+      "list_type": "瞪羚",
+      "list_name": "瞪羚企业",
+      "issuer": null,
+      "province": "江苏省",
+      "city": "苏州市",
+      "year": null,
+      "role": "service_offering"
+    },
+    {
+      "list_type": "企业技术中心",
+      "list_name": "企业技术中心",
+      "issuer": null,
+      "province": "江苏省",
+      "city": "苏州市",
+      "year": null,
+      "role": "service_offering"
+    }
+  ],
+  "evidence": [
+    {
+      "kind": "material",
+      "ref": "政府资助及业务体系培训",
+      "source_file": "01M51NYMPXC2XE34CDB5B1T1CJ.pptx",
+      "note": "四大业务线与组织架构"
+    },
+    {
+      "kind": "material",
+      "ref": "高新技术企业（2026 版政策解读与实操指南）",
+      "source_file": "01M51NYQRTSAMBB8S4MPYSX4V0.pptx",
+      "note": "高企八大条件与评分"
+    },
+    {
+      "kind": "material",
+      "ref": "中小企业专精特新发展梯度培育（2026）",
+      "source_file": "01M51NYMYB09H5WB28Y9JVAHND.pptx",
+      "note": "创小→省专→小巨人梯度"
+    },
+    {
+      "kind": "material",
+      "ref": "基础项目案例分享",
+      "source_file": "01M51NYNSM84PTE2CMW8J5NMK6.pptx",
+      "note": "匿名案例复盘，无真实客户全称"
+    },
+    {
+      "kind": "material",
+      "ref": "业务新人基础知识",
+      "source_file": "01M51NYN6TXPQNMR7XNQXA86ST.pptx",
+      "note": "同行类型与内部协同"
+    }
+  ],
+  "gaps": [
+    {
+      "field": "uscc",
+      "why": "材料未写统一社会信用代码",
+      "suggested_material": "营业执照"
+    },
+    {
+      "field": "legal_name",
+      "why": "仅有「钟林集团」品牌署名，无法定全称",
+      "suggested_material": "营业执照 / 对外公司简介"
+    },
+    {
+      "field": "company_id",
+      "why": "无 uscc，库内模糊挂靠未执行",
+      "suggested_material": "执照或企知道库已有主体"
+    },
+    {
+      "field": "own_qualifications",
+      "why": "未写明审计所/专利代理等自身执业资质",
+      "suggested_material": "资质证书扫描件"
+    },
+    {
+      "field": "verifiable_cases",
+      "why": "案例均为匿名画像",
+      "suggested_material": "脱敏后可核验客户案例"
+    },
+    {
+      "field": "reg_address_scale",
+      "why": "无注册地、成立时间、人数、营收",
+      "suggested_material": "对外简介 / 工商信息"
+    },
+    {
+      "field": "official_lists_2025_2026",
+      "why": "培训材料只有政策口径与节点，没有2025/2026官方认定名单全文",
+      "suggested_material": "由企知道侧入库：高企/专精特新/小巨人/科小等2025–2026公开名单与江苏苏州政策栏目"
+    }
+  ],
+  "source_files": [
+    {
+      "id": "01M51NYMPXC2XE34CDB5B1T1CJ.pptx",
+      "title": "政府资助及业务体系培训",
+      "ok": true
+    },
+    {
+      "id": "01M51NYMYB09H5WB28Y9JVAHND.pptx",
+      "title": "专精特新发展梯度培育（2026）",
+      "ok": true
+    },
+    {
+      "id": "01M51NYN6TXPQNMR7XNQXA86ST.pptx",
+      "title": "业务新人基础知识",
+      "ok": true
+    },
+    {
+      "id": "01M51NYNSM84PTE2CMW8J5NMK6.pptx",
+      "title": "基础项目案例分享",
+      "ok": true
+    },
+    {
+      "id": "01M51NYQRTSAMBB8S4MPYSX4V0.pptx",
+      "title": "高新技术企业（2026）",
+      "ok": true
+    },
+    {
+      "id": "01M51NYYVD26A3M50K98PFGZAZ.docx",
+      "title": "业务体系测试（A）+（B）",
+      "ok": true
+    },
+    {
+      "id": "01M51NYYV3FY464QTNX3YXBETJ.docx",
+      "title": "政府资助及业务体系测试卷（A）",
+      "ok": true
+    },
+    {
+      "id": "01M51NYYXR6THFF62T833MPRDS.docx",
+      "title": "政府资助及业务体系测试卷（B）",
+      "ok": true
+    },
+    {
+      "id": "01M51NZ03AQYHZB6EZV72EE1E5.docx",
+      "title": "专精特新（含科小）测试题（A）",
+      "ok": true
+    },
+    {
+      "id": "01M51NZ00MHS538E0VW3Q7MCPK.docx",
+      "title": "专精特新（含科小）测试题（B）",
+      "ok": true
+    },
+    {
+      "id": "01M51NZ0P0GWASDA3JRAH5Z275.docx",
+      "title": "高新技术企业知识测试题（A）",
+      "ok": true
+    },
+    {
+      "id": "01M51NZ09GDPMDFWWM37MM85CV.docx",
+      "title": "高新技术企业知识测试题（B）",
+      "ok": true
+    },
+    {
+      "id": "01M51NZ12B9EHSG0NQ87H72R5Q.docx",
+      "title": "高新技术企业知识测试题（未标卷别）",
+      "ok": true
+    },
+    {
+      "id": "01M51NYYT51JDND4WH7973HYGV.docx",
+      "title": null,
+      "ok": false,
+      "note": "162B 无效"
+    },
+    {
+      "id": "01M51NYZ14H0E801ZMQWBWEMBJ.docx",
+      "title": null,
+      "ok": false,
+      "note": "162B 无效"
+    }
+  ],
+  "policy_calendar": {
+    "years_covered_in_materials": [
+      2025,
+      2026
+    ],
+    "items": [
+      {
+        "year": 2026,
+        "topic": "高新技术企业",
+        "note": "2026过渡期：申报用旧办法、按新标准严审；新办法预计2026年底发布、2027启用",
+        "source_file": "01M51NYQRTSAMBB8S4MPYSX4V0.pptx"
+      },
+      {
+        "year": 2026,
+        "topic": "专精特新梯度",
+        "note": "工信部企业〔2026〕2号新版梯度培育办法；省专等申报节点含2026-05-25/06-25/09-20等",
+        "source_file": "01M51NYMYB09H5WB28Y9JVAHND.pptx"
+      },
+      {
+        "year": 2026,
+        "topic": "江苏省省级专精特新",
+        "note": "申请2026年度须为有效期内的前置资质（考题多次出现）",
+        "source_file": "test_papers"
+      },
+      {
+        "year": 2025,
+        "topic": "专精特新小巨人打分",
+        "note": "材料引用2025年申报中未过审企业约95%低于60分的经验数据",
+        "source_file": "01M51NYMYB09H5WB28Y9JVAHND.pptx"
+      },
+      {
+        "year": 2025,
+        "topic": "瞪羚成长性窗口",
+        "note": "条件引用2022–2025营收/人员复合增长与2025正增长",
+        "source_file": "01M51NYMPXC2XE34CDB5B1T1CJ.pptx"
+      },
+      {
+        "year": 2025,
+        "topic": "高企成长性计算示例年",
+        "note": "成长性公式示例年用2023/2024/2025",
+        "source_file": "高新测试卷"
+      }
+    ]
+  }
+}
