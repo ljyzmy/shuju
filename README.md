@@ -2,8 +2,8 @@
 
 本仓库通过 Git LFS 发布两个完整包（仓库里不保留分片）：
 
-- `qzd_db.zip`（1,593,883,796 字节，sha256 `0e4b5a83a3c64fe02560535ca9d977107b1f9e4e08060dfeb67e7f5058f3c8ba`）：PostgreSQL dump、脚本，以及除 `company.csv.gz` 以外的 CSV
-- `qzd_db_company_csv.zip`（986,006,528 字节，sha256 `578060613cb97a4b8e5dae256365eb14c8032e68f44e05aad5b88e327ef745a6`）：仅 `export/csv/company.csv.gz`
+- `qzd_db.zip`（1,944,406,384 字节，sha256 `2becd0c3becafa66a6dd33cbc40b883bcea88e2a88e454d44f8c2b8081fcb8af`）：PostgreSQL dump、脚本，以及除 `company.csv.gz` 以外的 CSV
+- `qzd_db_company_csv.zip`（986,839,385 字节，sha256 `61048532ee974233e3e1f37244030decd10971294e58f7a8ba3ddd9caa7b257b`）：仅 `export/csv/company.csv.gz`
 
 包内是可恢复的 PostgreSQL 17 数据库：统一 schema，以及可重复执行的下载/入库脚本。
 企业侧包含 GLEIF 与英国 Companies House 公开数据（条数与 v3 一致），并补充苏州相关公开名单；论文、专利为样本；国内政策来自中国政府网政策库与部分部委/省级栏目。
@@ -13,16 +13,18 @@
 
 | 数据 | 条数 |
 |---|---|
-| 企业 | 约 9,215,555 |
-| 苏州（city） | 约 19,742 |
-| 苏州相关名单 | 约 3.6 万 |
+| 企业 | 9,221,636 |
+| 苏州（city） | 25,834 |
+| company_list | 44,619 |
 | GLEIF | 3,463,900（与 v3 一致） |
 | UK Companies House | 5,704,711（与 v3 一致） |
 | 专利 | 723,336（与 v3 一致） |
 | 论文 | 10,000（与 v3 一致） |
 | 机构 | 13,633（与 v3 一致） |
 | 人员 | 约 74,787（与 v3 一致） |
-| 政策 | 27,477（与 v3 一致） |
+| 政策 | 27,637 |
+| 高企 2025 | 5,655 |
+| 专精特新 2025 | 2,108 |
 
 ### 下载
 
@@ -114,7 +116,7 @@ erDiagram
 规则：先读 robots.txt（gov.cn 只禁止 /2016*/、/premier/ 等，政策库路径允许）；每个进程每次请求间隔 1–2 秒；状态存在 `data/state/policy_crawl.sqlite`，URL 主键去重，列表页记录到第几页、详情页状态 `detail_ok`（1 成功 / -1 失败 / 0 待抓），中断后重跑会从断点继续。
 
 ### 本库政策统计（抓取完成）
-- 合计详情成功 **27477** 条，失败 3 条，URL 总数 27480
+- 合计详情成功 **27637** 条。v5 在原有站点之外新增江苏政策 **160** 条；下表仍是此前各站点明细（成功合计 27477）。
 | 站点 | 成功 | 失败 | 合计 |
 |---|---|---|---|
 | www.beijing.gov.cn | 1099 | 0 | 1099 |
