@@ -165,3 +165,7 @@ SELECT issuer, count(*) FROM policy WHERE pub_date>=current_date-730 AND tags &&
 ## 7. 已知限制
 - 三类样本是分别抽的，彼此重叠少，所以 company_patent / company_institution 关联条数少（规则匹配，Google 专利的申请人名是缩写形式，比如 HUAWEI TECH CO LTD）。全量后这些关联会自然变多；上线建议做专门的企业名称消歧（中英文名、曾用名、统一社会信用代码）。
 - 政策全文是从 HTML 提取的，个别站点版式特殊时正文会混进导航文字；附件只存链接，不下载附件本身。
+
+## 公司资料结构化提炼
+
+见 [extraction/](extraction/)。
