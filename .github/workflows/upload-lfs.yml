@@ -1,0 +1,187 @@
+name: Upload qzd v7 packages to Git LFS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - cursor/lfs-qzd-v7-07b7
+
+permissions:
+  contents: write
+
+concurrency:
+  group: upload-qzd-v7-lfs
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+          fetch-depth: 1
+
+      - name: Assemble zips and push Git LFS objects to main
+        env:
+          GIT_AUTHOR_NAME: Cursor Agent
+          GIT_AUTHOR_EMAIL: cursoragent@cursor.com
+          GIT_COMMITTER_NAME: Cursor Agent
+          GIT_COMMITTER_EMAIL: cursoragent@cursor.com
+          GIT_LFS_SKIP_SMUDGE: "1"
+        run: |
+          set -euo pipefail
+          trap 'echo "::error::failed line ${LINENO}: ${BASH_COMMAND}"' ERR
+          df -h
+          echo "::notice::checking git lfs"
+          if ! git lfs version; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq git-lfs
+            git lfs version
+          fi
+          git lfs install
+          git config user.name "Cursor Agent"
+          git config user.email "cursoragent@cursor.com"
+
+          core_n=$(find transfer/v7_core -name 'qzd_db_v7_core.part*' | wc -l)
+          extra_n=$(find transfer/v7_extra -name 'qzd_db_v7_extra.part*' | wc -l)
+          echo "::notice::chunks core=${core_n} extra=${extra_n}"
+          test "$core_n" -eq 85
+          test "$extra_n" -eq 48
+          test -f transfer/v7_core/qzd_db_v7_core.part084
+          test -f transfer/v7_extra/qzd_db_v7_extra.part047
+          test -f transfer/v7_core/MANIFEST_core.txt
+          test -f transfer/v7_extra/MANIFEST_extra.txt
+
+          core_bytes=$(awk -F= '/^bytes=/{print $2; exit}' transfer/v7_core/MANIFEST_core.txt)
+          core_sha=$(awk -F= '/^sha256=/{print $2; exit}' transfer/v7_core/MANIFEST_core.txt)
+          core_parts=$(awk -F= '/^parts=/{print $2; exit}' transfer/v7_core/MANIFEST_core.txt)
+          extra_bytes=$(awk -F= '/^bytes=/{print $2; exit}' transfer/v7_extra/MANIFEST_extra.txt)
+          extra_sha=$(awk -F= '/^sha256=/{print $2; exit}' transfer/v7_extra/MANIFEST_extra.txt)
+          extra_parts=$(awk -F= '/^parts=/{print $2; exit}' transfer/v7_extra/MANIFEST_extra.txt)
+          test "$core_bytes" = "1778476712"
+          test "$core_sha" = "fcb406e6c876a7da4d195193e72c253857bb002d912944c26e31cadeb47fee29"
+          test "$core_parts" = "85"
+          test "$extra_bytes" = "990680949"
+          test "$extra_sha" = "683668f18ac111c4505057a73ff8cd64beb42652d4b9d33024fc9625522f0844"
+          test "$extra_parts" = "48"
+
+          echo "::notice::assembling qzd_db.zip"
+          : > /tmp/qzd_db.zip
+          for i in $(seq 0 84); do
+            printf -v n '%03d' "$i"
+            cat "transfer/v7_core/qzd_db_v7_core.part${n}" >> /tmp/qzd_db.zip
+          done
+          rm -rf transfer/v7_core
+          echo "::notice::assembling qzd_db_company_csv.zip"
+          : > /tmp/qzd_db_company_csv.zip
+          for i in $(seq 0 47); do
+            printf -v n '%03d' "$i"
+            cat "transfer/v7_extra/qzd_db_v7_extra.part${n}" >> /tmp/qzd_db_company_csv.zip
+          done
+          rm -rf transfer
+          df -h
+
+          test "$(stat -c%s /tmp/qzd_db.zip)" = "$core_bytes"
+          test "$(stat -c%s /tmp/qzd_db_company_csv.zip)" = "$extra_bytes"
+          echo "${core_sha}  /tmp/qzd_db.zip" | sha256sum -c -
+          echo "${extra_sha}  /tmp/qzd_db_company_csv.zip" | sha256sum -c -
+
+          echo "::notice::checking out main"
+          git fetch origin main
+          git checkout -f -B main origin/main
+          mv /tmp/qzd_db.zip qzd_db.zip
+          mv /tmp/qzd_db_company_csv.zip qzd_db_company_csv.zip
+          rm -rf transfer
+          test ! -e transfer
+          test -d extraction
+          test -f extraction/README.md
+          test -f extraction/SCHEMA.md
+          test -f extraction/progress.md
+          test -f extraction/examples/zhonglin_group_materials.json
+          extraction_tree=$(git rev-parse HEAD:extraction)
+          df -h
+
+          python3 - << 'PY'
+          from pathlib import Path
+          path = Path("README.md")
+          text = path.read_text()
+          replacements = [
+              (
+                  "1,760,545,664 字节，sha256 `1d4395808f93724a42c0c3dcb2af8b3711bf3be110b91fb6e3ba89a9f4fcb619`",
+                  "1,778,476,712 字节，sha256 `fcb406e6c876a7da4d195193e72c253857bb002d912944c26e31cadeb47fee29`",
+              ),
+              (
+                  "986,819,191 字节，sha256 `1c4728124cc159d6ff469e2a0b10898c34c3ce03c8da3cd6608681874a419c06`",
+                  "990,680,949 字节，sha256 `683668f18ac111c4505057a73ff8cd64beb42652d4b9d33024fc9625522f0844`",
+              ),
+              ("| 企业 | 9,221,952 |", "| 企业 | 9,243,644 |"),
+              ("| 苏州（city） | 26,150 |", "| 苏州（city） | 47,842 |"),
+              ("| company_list | 45,720 |", "| company_list | 95,762 |"),
+              ("| 政策 | 27,703 |", "| 政策 | 27,754 |"),
+              ("合计详情成功 **27703** 条", "合计详情成功 **27754** 条"),
+          ]
+          for old, new in replacements:
+              if old not in text:
+                  raise SystemExit(f"README missing expected text: {old}")
+              text = text.replace(old, new, 1)
+          required = [
+              "1,778,476,712",
+              "fcb406e6c876a7da4d195193e72c253857bb002d912944c26e31cadeb47fee29",
+              "990,680,949",
+              "683668f18ac111c4505057a73ff8cd64beb42652d4b9d33024fc9625522f0844",
+              "| 企业 | 9,243,644 |",
+              "| 苏州（city） | 47,842 |",
+              "| company_list | 95,762 |",
+              "| 政策 | 27,754 |",
+              "合计详情成功 **27754** 条",
+          ]
+          for item in required:
+              if item not in text:
+                  raise SystemExit(f"README missing updated text: {item}")
+          stale = [
+              "1d4395808f93724a42c0c3dcb2af8b3711bf3be110b91fb6e3ba89a9f4fcb619",
+              "1c4728124cc159d6ff469e2a0b10898c34c3ce03c8da3cd6608681874a419c06",
+              "9,221,952",
+              "26,150",
+              "45,720",
+              "27,703",
+              "**27703**",
+          ]
+          for item in stale:
+              if item in text:
+                  raise SystemExit(f"README still contains stale text: {item}")
+          path.write_text(text)
+          print("README updated for v7")
+          PY
+
+          git lfs track "*.zip"
+          git add .gitattributes README.md qzd_db.zip qzd_db_company_csv.zip
+          if git diff --cached --name-only | grep -q '^extraction/'; then
+            echo "::error::refusing to commit extraction/"
+            exit 1
+          fi
+          if git diff --cached --name-only | grep -q '^transfer/'; then
+            echo "::error::refusing to commit transfer shards"
+            exit 1
+          fi
+          git cat-file -p :qzd_db.zip | grep -q "oid sha256:${core_sha}"
+          git cat-file -p :qzd_db_company_csv.zip | grep -q "oid sha256:${extra_sha}"
+          for f in qzd_db.zip qzd_db_company_csv.zip; do
+            pointer_size=$(git cat-file -s ":$f")
+            echo "::notice::pointer ${f} bytes ${pointer_size}"
+            test "$pointer_size" -lt 200
+          done
+          git commit -m "通过 Git LFS 发布 v7 的 qzd_db.zip 与 qzd_db_company_csv.zip" -m "qzd_db.zip 1778476712 字节，sha256 fcb406e6c876a7da4d195193e72c253857bb002d912944c26e31cadeb47fee29（由 qzd_db_v7_core 分片拼接：dump、脚本，以及除 company.csv.gz 外的 CSV）。qzd_db_company_csv.zip 990680949 字节，sha256 683668f18ac111c4505057a73ff8cd64beb42652d4b9d33024fc9625522f0844（由 qzd_db_v7_extra 分片拼接，仅 company.csv.gz）。企业 9243644，苏州 47842，company_list 95762，政策 27754。仓库中不保留分片，extraction/ 未改。"
+          test "$(git rev-parse HEAD:extraction)" = "$extraction_tree"
+          if git ls-tree -r --name-only HEAD | grep -q '^transfer/'; then
+            echo "::error::main commit contains transfer shards"
+            exit 1
+          fi
+          echo "::notice::pushing main"
+          git push origin HEAD:main
+          local_sha=$(git rev-parse HEAD)
+          remote_sha=$(git ls-remote origin refs/heads/main | awk '{print $1}')
+          echo "::notice::pushed ${local_sha} remote ${remote_sha}"
+          test "$local_sha" = "$remote_sha"
