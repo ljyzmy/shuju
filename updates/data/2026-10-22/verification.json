@@ -1,0 +1,31 @@
+{
+  "checks": {
+    "postgres_schema_parse": true,
+    "sqlite_integrity": true,
+    "lei_validation": true,
+    "uscc_checksum": true,
+    "china_only": true,
+    "no_future_papers": true,
+    "no_policy_fulltext_claim": true,
+    "separate_deadlines": true,
+    "nonofficial_marked": true,
+    "postgres_reimport_idempotent_counts": true,
+    "preserve_company_tags": true,
+    "preserve_richer_person_fields": true
+  },
+  "all_passed": true,
+  "postgres_version": 160015,
+  "postgres_table_counts": {
+    "company": 4071,
+    "paper": 600,
+    "person": 3020,
+    "institution": 850,
+    "paper_author": 5025,
+    "qzd_refresh.snapshot": 4676,
+    "qzd_refresh.company_alias": 5551,
+    "qzd_refresh.policy_evidence": 18,
+    "qzd_refresh.paper_author_affiliation": 5812
+  },
+  "target_repository_pushed": false,
+  "note": "Tests ran against a newly created local test database using the recovered core schema, NOT the user production database or original 9-million-row dump."
+}

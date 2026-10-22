@@ -9,7 +9,49 @@
 企业侧包含 GLEIF 与英国 Companies House 公开数据（条数与 v3 一致），并补充苏州相关公开名单；论文、专利为样本；国内政策来自中国政府网政策库与部分部委/省级栏目。
 只使用合法、免费、公开的数据。
 
-## 当前发布包
+## 2026-10-22 独立增量（不替换原发布包）
+
+`updates/` 提供本次实时采集结果、字段规范化、只读本地查询和 PostgreSQL 导入脚本。原两个 LFS 压缩包未重写，下面的旧包统计也未增加；本批数据可能与原库重叠，不能把采集条数当作净新增条数。
+
+| 本批内容 | 校验后条数 |
+|---|---:|
+| 中国 LEI 法人记录 | 4,071 |
+| 来源提供的名称及别名 | 5,551 |
+| 中国机构参与的 2026 年近期论文 | 600 |
+| 论文中出现的机构 / 作者 | 850 / 3,020 |
+| 论文作者关系 / 完整机构署名关系 | 5,025 / 5,812 |
+| 政策来源文档 / 原文规则片段 | 5 / 18 |
+
+企业抓取范围：中国近期更新 1,000 条，加中国记录中“苏州”全文匹配 3,097 条，去重后原始 4,072 条；隔离 1 条 LEI 校验失败记录后，可导入 4,071 条。“苏州”关键词命中不表示注册地址一定在苏州，也不覆盖所有苏州企业。39 个长度为 18 的登记号未通过统一社会信用代码格式/校验位检查：保留原始登记号，不填入 `uscc`。来源是 GLEIF 法人识别数据，不等于国内工商全量或资质证明。
+
+政策包含 3 份政府原文提取、1 份高校申报通知、1 份待官方核验转载。仅保存字段、原文证据片段和 7 个附件链接，**不声称抓到了全文或附件正文**。发布日期、成文日期、企业截止日、部门推荐截止日分别存储；缺失字段留空，不从 URL 猜日期。转载不能作为最终政策依据。
+
+数据来源：[GLEIF API](https://api.gleif.org/api/v1/lei-records)、[OpenAlex API](https://api.openalex.org/works)；政策逐条保存原文 URL。详情见 `collection_manifest.json`、`validation.json`、`verification.json`。本批未更新专利、商标或高企/专精特新企业名单，不据此推出否定结论。
+
+### 复用本批与继续采集
+
+```bash
+pip install -r updates/requirements.txt
+# 仓库不追踪可重建的 SQLite；交付 ZIP 已附一份，克隆仓库则先构建：
+python updates/scripts/build_lookup.py updates/data/2026-10-22 --out updates/data/2026-10-22/qzd_lookup.sqlite
+python updates/scripts/lookup.py updates/data/2026-10-22/qzd_lookup.sqlite 苏州 --kind company
+python updates/scripts/lookup.py updates/data/2026-10-22/qzd_lookup.sqlite 专精特新 --kind policy
+# 校验输入，不连接数据库：
+python updates/scripts/import_postgres.py updates/data/2026-10-22 --dry-run
+# 先备份原库，在环境变量中配置 QZD_DSN，再导入：
+# 默认仅写 qzd_refresh 的来源快照和证据表，不动原业务表
+python updates/scripts/import_postgres.py updates/data/2026-10-22
+# 明确需要合并原库 company / paper / institution / person / paper_author 时：
+python updates/scripts/import_postgres.py updates/data/2026-10-22 --merge-core
+# 下一批采集请使用新目录，避免覆盖历史证据：
+python updates/scripts/collect_refresh.py --out updates/data/NEXT_RUN --cn-limit 1000 --suzhou-limit 4000 --paper-limit 600
+```
+
+导入按唯一键 UPSERT、单事务失败回滚、不执行 DROP/DELETE/TRUNCATE；原有企业标签、未提供的作者统计等丰富字段保留。所有论文机构署名额外写入 `qzd_refresh.paper_author_affiliation`，避免原表只保留首个机构丢失信息。政策片段只写证据表，不覆盖 `policy.full_text`。未命中必须返回“当前快照未收录，仍需官方核验”，不能回答“不在名单/没有专利”。
+
+实测：在从原包恢复的核心 schema 上创建独立 PostgreSQL 16 测试库，完成导入、重复导入条数不变、原有标签/丰富字段保留等 12 项检查。测试不是对用户线上数据库或原 924 万条完整 dump 的实际更新；线上仍建议 PostgreSQL 17 并先行备份。
+
+## 当前发布包（原快照）
 
 | 数据 | 条数 |
 |---|---|
@@ -139,8 +181,9 @@ erDiagram
 
 ## 5. 运行
 ```bash
-# PostgreSQL 17（本机已装，库 qzd / 用户 box / 密码 qzd）
-export QZD_DSN="host=localhost dbname=qzd user=box password=qzd"
+# PostgreSQL 17；连接凭据通过环境变量/密钥管理配置，不写入仓库。
+# 请检查并更换历史文档和原包脚本中的演示凭据，不要用于生产。
+export QZD_DSN="${QZD_DSN:?请先通过环境变量设置数据库连接}"
 ./run_all.sh                       # 全流程，可重复执行
 # 只恢复数据：
 createdb qzd && pg_restore -d qzd export/qzd.dump

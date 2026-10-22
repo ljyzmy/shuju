@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+updates/data/*/*.sqlite
+updates/data/*/*.sqlite-*
+.env
+.env.*

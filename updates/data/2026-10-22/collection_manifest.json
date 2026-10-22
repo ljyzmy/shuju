@@ -1,0 +1,430 @@
+{
+  "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+  "as_of": "2026-10-22",
+  "company_records": 4072,
+  "paper_records": 600,
+  "coverage": "latest 1000 CN LEI records plus bounded CN fulltext matches for 苏州 (not necessarily registered in Suzhou); recent works with at least one CN affiliation; NOT a full national registry or full publication corpus",
+  "requests": [
+    {
+      "source": "cn_recent",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&page%5Bsize%5D=200&page%5Bnumber%5D=1&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 1,
+          "perPage": 200,
+          "from": 1,
+          "to": 200,
+          "total": 107255,
+          "lastPage": 537
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "cn_recent",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&page%5Bsize%5D=200&page%5Bnumber%5D=2&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 2,
+          "perPage": 200,
+          "from": 201,
+          "to": 400,
+          "total": 107255,
+          "lastPage": 537
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "cn_recent",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&page%5Bsize%5D=200&page%5Bnumber%5D=3&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 3,
+          "perPage": 200,
+          "from": 401,
+          "to": 600,
+          "total": 107255,
+          "lastPage": 537
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "cn_recent",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&page%5Bsize%5D=200&page%5Bnumber%5D=4&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 4,
+          "perPage": 200,
+          "from": 601,
+          "to": 800,
+          "total": 107255,
+          "lastPage": 537
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "cn_recent",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&page%5Bsize%5D=200&page%5Bnumber%5D=5&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 5,
+          "perPage": 200,
+          "from": 801,
+          "to": 1000,
+          "total": 107255,
+          "lastPage": 537
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=1&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 1,
+          "perPage": 200,
+          "from": 1,
+          "to": 200,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=2&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 2,
+          "perPage": 200,
+          "from": 201,
+          "to": 400,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=3&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 3,
+          "perPage": 200,
+          "from": 401,
+          "to": 600,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=4&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 4,
+          "perPage": 200,
+          "from": 601,
+          "to": 800,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=5&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 5,
+          "perPage": 200,
+          "from": 801,
+          "to": 1000,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=6&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 6,
+          "perPage": 200,
+          "from": 1001,
+          "to": 1200,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=7&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 7,
+          "perPage": 200,
+          "from": 1201,
+          "to": 1400,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=8&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 8,
+          "perPage": 200,
+          "from": 1401,
+          "to": 1600,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=9&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 9,
+          "perPage": 200,
+          "from": 1601,
+          "to": 1800,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=10&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 10,
+          "perPage": 200,
+          "from": 1801,
+          "to": 2000,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=11&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 11,
+          "perPage": 200,
+          "from": 2001,
+          "to": 2200,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=12&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 12,
+          "perPage": 200,
+          "from": 2201,
+          "to": 2400,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=13&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 13,
+          "perPage": 200,
+          "from": 2401,
+          "to": 2600,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=14&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 14,
+          "perPage": 200,
+          "from": 2601,
+          "to": 2800,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=15&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 15,
+          "perPage": 200,
+          "from": 2801,
+          "to": 3000,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 200
+    },
+    {
+      "source": "suzhou_fulltext",
+      "url": "https://api.gleif.org/api/v1/lei-records?filter%5Bentity.legalAddress.country%5D=CN&filter%5Bfulltext%5D=%E8%8B%8F%E5%B7%9E&page%5Bsize%5D=200&page%5Bnumber%5D=16&sort=-registration.lastUpdateDate",
+      "meta": {
+        "goldenCopy": {
+          "publishDate": "2026-10-21T16:00:00Z"
+        },
+        "pagination": {
+          "currentPage": 16,
+          "perPage": 200,
+          "from": 3001,
+          "to": 3097,
+          "total": 3097,
+          "lastPage": 16
+        }
+      },
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00",
+      "rows": 97
+    },
+    {
+      "source": "openalex",
+      "url": "https://api.openalex.org/works?filter=institutions.country_code%3Acn%2Cfrom_publication_date%3A2026-01-01%2Cto_publication_date%3A2026-10-22&sort=publication_date%3Adesc&per-page=200&page=1",
+      "rows": 200,
+      "total": 1319413,
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00"
+    },
+    {
+      "source": "openalex",
+      "url": "https://api.openalex.org/works?filter=institutions.country_code%3Acn%2Cfrom_publication_date%3A2026-01-01%2Cto_publication_date%3A2026-10-22&sort=publication_date%3Adesc&per-page=200&page=2",
+      "rows": 200,
+      "total": 1319413,
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00"
+    },
+    {
+      "source": "openalex",
+      "url": "https://api.openalex.org/works?filter=institutions.country_code%3Acn%2Cfrom_publication_date%3A2026-01-01%2Cto_publication_date%3A2026-10-22&sort=publication_date%3Adesc&per-page=200&page=3",
+      "rows": 200,
+      "total": 1319413,
+      "fetched_at": "2026-10-22T07:30:11.622362+00:00"
+    }
+  ],
+  "errors": []
+}
